@@ -45,6 +45,22 @@ router.get('/like/post/:id', isLoggedIn, async function(req, res) {
   res.redirect("/feed");
 });
 
+router.get('/delete/post/:id', isLoggedIn, async function(req, res) {
+  const user = await userModel.findOne({username : req.session.passport.user});
+  const postId = req.params.id;
+  console.log(postId);
+  try {
+    await postModel.findByIdAndDelete(postId);
+    res.redirect("/feed");
+    return;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error')
+  }
+
+  res.redirect("/feed");
+});
+
 router.get('/edit', isLoggedIn,async function(req, res) {
   const user = await userModel.findOne({username : req.session.passport.user});
   res.render('edit', {footer: true, user});

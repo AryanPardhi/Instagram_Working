@@ -72,12 +72,15 @@
     <div class="posts mb-20">
       <% posts.reverse().forEach(function(elem){ %>
         <div class="post mt-10 w-full min-h-[50vh]">
-          <div class="title px-4 flex items-center gap-2">
+          <div class="title px-4 flex items-center gap-2 relative">
             <div class="w-[8vw] h-[8vw] bg-sky-100 rounded-full overflow-hidden">
               <img class="w-full h-full object-cover" src="/images/uploads/<%= elem.user.profileImage %>" alt="">
             </div>
             <h4 class="text-sm"><%= elem.user.username %></h4>
             <h6 class="text-xs opacity-30">1d</h6>
+            <div class="delete absolute right-5 cursor-pointer">
+              <a href="/delete/post/<%= elem._id %>"><i class="ri-delete-bin-5-fill"></i></a>
+            </div>
           </div>
           <div class="w-full h-96 mt-4 bg-sky-100 overflow-hidden">
             <img class="w-full h-full object-cover" src="/images/uploads/<%= elem.picture %>" alt="">
